@@ -1,0 +1,39 @@
+apiVersion: 1.0
+image:
+  imageType: iso
+  arch: x86_64
+  baseImage: SLE-Micro.iso
+  outputImageName: eib-image.iso
+operatingSystem:
+  isoConfiguration:
+    installDevice: /dev/sda
+  time:
+    timezone: Europe/London
+    ntp:
+      forceWait: true
+      pools:
+        - time.google.com
+  kernelArgs:
+  - intel_idle.max_cstate=0
+  - skew_tick=1
+  - tsc=reliable
+  - rcupdate.rcu_normal_after_boot=1
+  users:
+  - username: root
+    encryptedPassword: 
+  keymap: us
+  packages:
+    noGPGCheck: false
+    packageList:
+      - nfs-client
+      - nfs-kernel-server
+      - rpcbind
+      - mdadm
+      - multipath-tools
+      - gptfdisk
+      - device-mapper
+      - iperf
+    additionalRepos:
+      - url:
+        unsigned: true
+    sccRegistrationCode: 
