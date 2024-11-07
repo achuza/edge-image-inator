@@ -8,20 +8,18 @@ operatingSystem:
   isoConfiguration:
     installDevice: /dev/sda
   time:
-    timezone: Europe/London
+    timezone: America/Chicago
     ntp:
       forceWait: true
       pools:
         - time.google.com
-  kernelArgs:
-  - intel_idle.max_cstate=0
-  - skew_tick=1
-  - tsc=reliable
-  - rcupdate.rcu_normal_after_boot=1
   users:
   - username: root
     encryptedPassword: 
   keymap: us
+  systemd:
+    enable:
+      - open-vm-tools
   packages:
     noGPGCheck: false
     packageList:
@@ -33,7 +31,7 @@ operatingSystem:
       - gptfdisk
       - device-mapper
       - iperf
-    additionalRepos:
+      - open-vm-tools
       - url:
         unsigned: true
     sccRegistrationCode: 
